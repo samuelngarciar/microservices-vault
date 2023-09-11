@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: microservice-b
+  labels:
+    app: microservice-b-with-annotations
+  annotations:
+    vault.hashicorp.com/agent-inject: 'true'
+    vault.hashicorp.com/role: 'microservices-role'
+    vault.hashicorp.com/agent-inject-secret-credentials.txt: 'secret/data/microservices/secreto-b'
+spec:
+  serviceAccountName: internal-app
+  containers:
+    - name: app
+      image: nginx
